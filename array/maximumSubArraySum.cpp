@@ -73,3 +73,32 @@ class Solution {
         return globalMaxima;
     }
 };
+
+
+
+// Another way (just a bit different implementation of the same appraoch)
+
+class Solution {
+  public:
+    int maxSubarraySum(vector<int> &arr) {
+        int globalMaxima = INT_MIN, currentMaxima = 0;
+        int start = 0, end = 0;
+        int tempStart = 0;
+        
+        for(int i = 0; i < arr.size(); i++) {
+            currentMaxima += arr[i];
+            if(currentMaxima > globalMaxima) {
+                globalMaxima = currentMaxima;
+                start = tempStart;
+                end = i;
+            }
+            
+            if(currentMaxima < 0) {
+                currentMaxima = 0;
+                tempStart = i;
+            }
+        }
+        // cout << start << end << endl;
+        return globalMaxima;
+    }
+};
